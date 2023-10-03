@@ -11,14 +11,14 @@ export const Sidebar = () => {
       <div className="h-full overflow-y-auto px-3 py-4">
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <AiOutlineHome size={30} />
           <span>Home</span>
         </Link>
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <LiaMapMarkerSolid size={30} />
           <span>Mapa</span>
@@ -26,28 +26,28 @@ export const Sidebar = () => {
 
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <MdOutlineAddBox size={30} />
           <span>Adicionar Evento</span>
         </Link>
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <FiFilter size={30} />
           <span>Filtrar Evento</span>
         </Link>
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <BsQuestionCircle size={30} />
           <span>SAC</span>
         </Link>
         <Link
           href="/"
-          className="mb-9 flex cursor-pointer flex-col items-center justify-center"
+          className="mb-9 flex cursor-pointer flex-col items-center justify-center transition-all hover:translate-y-1"
         >
           <MdOutlinePrivacyTip size={30} />
           <span>Privacidade</span>

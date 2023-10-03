@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 
 import { Sidebar } from './components/sidebar'
 import { Navbar } from './components/navbar'
+import { Footer } from './components/footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Navbar />
         <Sidebar />
         {children}
+        <Footer />
       </body>
     </html>
   )
