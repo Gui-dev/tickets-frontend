@@ -4,11 +4,16 @@ import Link from 'next/link'
 
 import { BannerPrimary } from '@/app/components/banner-primary'
 import { BannerSmall } from '@/app/components/banner-small'
+import { fetchWrapper } from '@/utils/fetch-wrapper'
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const events = await fetchWrapper('/events', {
+    method: 'GET',
+  })
+
   return (
     <section className="container my-8  md:pr-20 lg:pr-20">
-      <BannerPrimary />
+      <BannerPrimary event={events[0]} />
 
       <div className="p-8">
         <h2 className="text-2xl font-bold text-primary">Eventos em destaque</h2>
@@ -18,9 +23,9 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <BannerSmall />
-        <BannerSmall />
-        <BannerSmall />
+        {events.map((event: any) => {
+          return <BannerSmall key={event.id} event={event} />
+        })}
       </div>
 
       <div className="p-8">
