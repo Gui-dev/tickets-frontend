@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "leaflet": "^1.9.4",
     "next": "latest",
     "react": "latest",
