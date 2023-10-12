@@ -11,6 +11,8 @@ export default async function Dashboard() {
     method: 'GET',
   })
 
+  const secondaryEvents = events.slice(1)
+
   return (
     <section className="container my-8  md:pr-20 lg:pr-20">
       <BannerPrimary event={events[0]} />
@@ -23,7 +25,7 @@ export default async function Dashboard() {
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        {events.map((event: any) => {
+        {secondaryEvents.map((event: any) => {
           return <BannerSmall key={event.id} event={event} />
         })}
       </div>
