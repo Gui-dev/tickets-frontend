@@ -1,28 +1,13 @@
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { IEvent } from '@/interfaces/event'
 
-export interface IEvent {
-  event: {
-    id: string
-    user_id: string | null
-    title: string
-    description: string
-    categories: string[]
-    city: string
-    address: string
-    location: string[]
-    banner: string
-    flyers: string[]
-    coupons: string[]
-    price: number
-    sector: string
-    date: string
-    created_at: string
-  }
+type BannerSmallProps = {
+  event: IEvent
 }
 
-export const BannerSmall = ({ event }: IEvent) => {
+export const BannerSmall = ({ event }: BannerSmallProps) => {
   const day = format(new Date(event.date), 'd/L/yyyy', {
     locale: ptBR,
   })

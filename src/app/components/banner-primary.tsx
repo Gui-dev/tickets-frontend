@@ -1,28 +1,13 @@
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { ptBR } from 'date-fns/locale'
+import { IEvent } from '@/interfaces/event'
 
-interface IEvent {
-  event: {
-    id: string
-    user_id: string | null
-    title: string
-    description: string
-    categories: string[]
-    city: string
-    address: string
-    location: string[]
-    banner: string
-    flyers: string[]
-    coupons: string[]
-    price: number
-    sector: string
-    date: string
-    created_at: string
-  }
+type BannerPrimaryProps = {
+  event: IEvent
 }
 
-export const BannerPrimary = ({ event }: IEvent) => {
+export const BannerPrimary = ({ event }: BannerPrimaryProps) => {
   const day = format(new Date(event.date), 'd/L/yyyy', {
     locale: ptBR,
   })
