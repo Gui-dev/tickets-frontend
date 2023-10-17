@@ -37,11 +37,11 @@ const FilterEvent = () => {
 
   return (
     <section className="container h-screen px-8">
-      <div className="flex flex-row gap-4">
-        <div className="mb-4 w-[25rem]">
-          <h1 className="my-8 text-2xl font-medium text-primary">
-            Eventos encontrados
-          </h1>
+      <div className="mb-4">
+        <h1 className="my-8 text-2xl font-medium text-primary">
+          Eventos encontrados
+        </h1>
+        <div className="grid w-[90%] grid-cols-3 gap-6">
           {events &&
             events.map((event, index) => {
               return <CardFilter key={event.id} event={event} />

@@ -18,7 +18,12 @@ export const CardFilter = ({ event }: CardFilterProps) => {
   })
   return (
     <div className="mb-6 rounded-md transition-all hover:translate-y-1">
-      <div className="relative h-[150px] w-full rounded-3xl rounded-b-none bg-black bg-opacity-25 md:w-[1024px] lg:w-full">
+      <div
+        className="relative h-[150px] w-full rounded-3xl rounded-b-none bg-black bg-opacity-25 bg-cover bg-center bg-no-repeat md:w-[1024px] lg:w-full"
+        style={{
+          backgroundImage: `url(${event.banner})`,
+        }}
+      >
         <article className="absolute top-0 p-4 text-white">
           <h1 className="text-base font-bold">{event.title}</h1>
           <div className="mt-1 flex flex-col justify-between">
@@ -58,7 +63,7 @@ export const CardFilter = ({ event }: CardFilterProps) => {
                 <p>{hour}h</p>
               </div>
             </div>
-            <div className="mt-10 flex flex-row gap-1">
+            <div className="mb-28 mt-10 flex flex-row gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -78,7 +83,7 @@ export const CardFilter = ({ event }: CardFilterProps) => {
                   d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                 />
               </svg>
-              <p>
+              <p className="text-sm font-normal text-gray-50">
                 {event.address} - {event.city}
               </p>
             </div>
