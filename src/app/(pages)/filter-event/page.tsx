@@ -9,22 +9,24 @@ import { fetchWrapper } from '@/utils/fetch-wrapper'
 
 const FilterEvent = () => {
   const [events, setEvents] = useState<IEvent[]>([])
+  const [error, setError] = useState(false)
   const searchParams = useSearchParams()
 
-  const searchEvents = useCallback(() => {
+  const searchEvents = useCallback(async () => {
     const params = searchParams.get('q')
     const data = { name: params }
-    fetchWrapper(`/events/filter/name`, {
+    const response = await fetchWrapper(`/events/filter/name`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf8',
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
-        setEvents(response)
-      })
-      .catch((error) => console.log('ERROR: ', error))
+    if (response.error) {
+      setError(true)
+      return
+    }
+    setEvents(response)
   }, [searchParams])
 
   useEffect(() => {
@@ -33,20 +35,31 @@ const FilterEvent = () => {
     }
   }, [searchParams, searchEvents])
 
-  console.log(events)
-
   return (
     <section className="container h-screen px-8">
       <div className="mb-4">
-        <h1 className="my-8 text-2xl font-medium text-primary">
-          Eventos encontrados
-        </h1>
+        {events.length > 0 && (
+          <h1 className="my-8 text-lg font-bold text-primary">
+            Eventos encontrados
+          </h1>
+        )}
         <div className="grid w-[90%] grid-cols-3 gap-6">
-          {events &&
+          {events.length > 0 &&
             events.map((event, index) => {
               return <CardFilter key={event.id} event={event} />
             })}
         </div>
+
+        {error && (
+          <div className="flex h-screen flex-col items-center justify-center">
+            <h2 className="mb-2 text-lg font-normal text-primary">
+              Opssss, nenhum evento foi encontrdo
+            </h2>
+            <p className="text-lg font-normal text-gray-600">
+              Pesquise por outros termos
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )
