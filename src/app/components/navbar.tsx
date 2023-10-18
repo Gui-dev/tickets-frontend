@@ -26,7 +26,7 @@ export const Navbar = () => {
       >
         <input
           type="text"
-          placeholder="Digite o nome do evento para pesquisar :)"
+          placeholder="Pesquise por nome, endereço, cidade ou tipo de música"
           className="w-[90%] rounded-md px-3 py-2 text-sm font-normal"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
