@@ -94,7 +94,7 @@ export const CardFilter = ({ event }: CardFilterProps) => {
       <div className="relative w-full rounded-3xl rounded-t-none bg-slate-200 bg-opacity-25 p-4 md:w-[1024px] lg:w-full">
         <p className="text-sm text-gray-600">{event.description}...</p>
         <Link
-          href={`/events/details/${event.id}`}
+          href={`/event/details/${event.id}`}
           className="mt-4 flex items-center justify-center"
         >
           <Button variant="primary">Ver detalhes do evento</Button>
