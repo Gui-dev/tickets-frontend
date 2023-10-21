@@ -1,8 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
+import { fetchWrapper } from '@/utils/fetch-wrapper'
+import { IEvent } from '@/interfaces/event'
+import { CardFilter } from './card-filter'
+
+import 'leaflet-defaulticon-compatibility'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet/dist/leaflet.css'
 
 type PositionProps = {
@@ -11,24 +17,34 @@ type PositionProps = {
 }
 
 export const Map = () => {
-  const markers = [
-    { lat: -19.899613, lng: -43.9314789 },
-    { lat: -12.89965, lng: -43.7364789 },
-    { lat: -12.82919, lng: -43.987981 },
-    { lat: -19.968614, lng: -43.405302 },
-  ]
+  const [events, setEvents] = useState<IEvent[]>([])
   const [position, setPostion] = useState<PositionProps>({} as PositionProps)
   const [loading, setLoading] = useState(true)
+
+  const getEvents = useCallback(async (lat: number, lng: number) => {
+    const events: IEvent[] = await fetchWrapper(
+      `/events?latitude=${lat}&longitude=${lng}`,
+      {
+        method: 'GET',
+      },
+    )
+    setEvents(events)
+  }, [])
+
+  console.log('EVENTS: ', events)
 
   useEffect(() => {
     try {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
+            const lat = position.coords.latitude
+            const lng = position.coords.longitude
             setPostion({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
+              lat,
+              lng,
             })
+            getEvents(lat, lng)
             setLoading(false)
           },
           (error) => {
@@ -41,7 +57,7 @@ export const Map = () => {
       console.log(error)
       setLoading(false)
     }
-  }, [])
+  }, [getEvents])
 
   if (loading) {
     return (
@@ -59,24 +75,26 @@ export const Map = () => {
           lat: position.lat,
           lng: position.lng,
         }}
-        zoom={13}
+        zoom={11}
         scrollWheelZoom={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {markers.map((marker) => {
+        {events.map((event) => {
           return (
             <Marker
               key={String(Math.random())}
               position={{
-                lat: marker.lat,
-                lng: marker.lng,
+                lat: Number(event.location[0]),
+                lng: Number(event.location[1]),
               }}
             >
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
+              <Popup className="p-8">
+                <div className="h-80 w-80">
+                  <CardFilter event={event} />
+                </div>
               </Popup>
             </Marker>
           )
