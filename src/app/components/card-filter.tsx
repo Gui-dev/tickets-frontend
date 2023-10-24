@@ -63,7 +63,7 @@ export const CardFilter = ({ event }: CardFilterProps) => {
                 <p>{hour}h</p>
               </div>
             </div>
-            <div className="mb-28 mt-10 flex flex-row gap-1">
+            <div className="-mt-4 flex flex-row items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
