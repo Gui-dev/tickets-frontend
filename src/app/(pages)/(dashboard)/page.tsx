@@ -11,24 +11,47 @@ export default async function Dashboard() {
     method: 'GET',
   })
 
-  const secondaryEvents = events.slice(1)
+  const secondaryEvents = events && events.length > 0 ? events.slice(1) : null
+
+  if (events.error) {
+    return (
+      <div className="container my-8 flex h-screen flex-col items-center justify-center gap-1 md:pr-20 lg:pr-20">
+        <h2 className="text-2xl font-bold text-primary">
+          Nenhum evento cadastrado
+        </h2>
+        <p className="text-base font-light text-gray-600">
+          Cadastre um agora mesmo,{' '}
+          <Link href="/create-event" className="hover:text-primary">
+            clique aqui
+          </Link>
+        </p>
+      </div>
+    )
+  }
 
   return (
     <section className="container my-8  md:pr-20 lg:pr-20">
       <BannerPrimary event={events[0]} />
 
-      <div className="p-8">
-        <h2 className="text-2xl font-bold text-primary">Eventos em destaque</h2>
-        <p className="text-base font-light text-gray-600">
-          Se divirta com os principais eventos de São Paulo e do Brasil
-        </p>
-      </div>
+      {secondaryEvents && secondaryEvents.length > 0 && (
+        <>
+          <div className="p-8">
+            <h2 className="text-2xl font-bold text-primary">
+              Eventos em destaque
+            </h2>
+            <p className="text-base font-light text-gray-600">
+              Se divirta com os principais eventos de São Paulo e do Brasil
+            </p>
+          </div>
 
-      <div className="grid grid-cols-3 gap-2">
-        {secondaryEvents.map((event: any) => {
-          return <BannerSmall key={event.id} event={event} />
-        })}
-      </div>
+          <div className="grid grid-cols-3 gap-2">
+            {secondaryEvents.map((event: any) => {
+              console.log('EVENTS_2: ', event)
+              return <BannerSmall key={event.id} event={event} />
+            })}
+          </div>
+        </>
+      )}
 
       <div className="p-8">
         <h2 className="text-2xl font-bold text-primary">
