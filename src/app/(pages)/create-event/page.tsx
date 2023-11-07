@@ -69,8 +69,6 @@ const CreateEvent = () => {
     }
   }
 
-  console.log('ERRORS: ', errors)
-
   const handleAddressSelected = (address: AddressLocationProps) => {
     const { city, geoLocation } = address
     setValue('city', city)
