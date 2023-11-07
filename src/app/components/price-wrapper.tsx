@@ -9,7 +9,7 @@ type PriceWrapperProps = {
 export const PriceWrapper = ({ quantity, setQuantity }: PriceWrapperProps) => {
   const handleDecrementQuantity = () => {
     if (quantity <= 0) {
-      setQuantity(0)
+      setQuantity(1)
       return
     }
     setQuantity((prev) => prev - 1)

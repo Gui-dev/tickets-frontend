@@ -3,15 +3,18 @@ import { Input } from './form/input'
 import { Button } from './form/button'
 import { useMemo, useState } from 'react'
 import { PriceWrapper } from './price-wrapper'
+import { formatCurrencyNumber } from '@/utils/format-currency-number'
 
-export const CardBuyTicket = () => {
+type CardBuyTicketProps = {
+  price: number
+}
+
+export const CardBuyTicket = ({ price }: CardBuyTicketProps) => {
   const [quantity, setQuantity] = useState(1)
-  const price = 100
   const subtotal = useMemo(() => {
-    return price * quantity
-  }, [quantity])
-
-  console.log(quantity)
+    const subtotal = price * quantity
+    return formatCurrencyNumber(subtotal)
+  }, [quantity, price])
 
   return (
     <div className="flex w-[85%] flex-col rounded bg-white shadow-lg">
