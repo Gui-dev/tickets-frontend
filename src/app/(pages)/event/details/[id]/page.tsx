@@ -1,10 +1,11 @@
+import Image from 'next/image'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 import { CardBuyTicket } from '@/app/components/card-buy-ticket'
 import { IEvent } from '@/interfaces/event'
 import { fetchWrapper } from '@/utils/fetch-wrapper'
-import Image from 'next/image'
+import { MapDetails } from '@/app/components/map-details'
 
 type EventDetailsProps = {
   params: {
@@ -178,9 +179,16 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
                 )
               })}
             </div>
+
+            <div className="mt-4 flex w-[90%]">
+              <MapDetails
+                lat={Number(event.location[0])}
+                lng={Number(event.location[1])}
+              />
+            </div>
           </div>
 
-          <div className="flex">
+          <div className="fix  h-[350px]">
             <CardBuyTicket price={event.price} />
           </div>
         </div>

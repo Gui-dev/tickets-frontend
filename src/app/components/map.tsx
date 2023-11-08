@@ -31,8 +31,6 @@ export const Map = () => {
     setEvents(events)
   }, [])
 
-  console.log('EVENTS: ', events)
-
   useEffect(() => {
     try {
       if (navigator.geolocation) {
